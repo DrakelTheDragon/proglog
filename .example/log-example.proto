@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+// We specify the package name for two reasons:
+// 1. This protobuf package name is used as the package name in the generated Go code.
+// 2. It prevents name clashes between protocol message types that have the same name.
+//
+// The 'v1' represents these protobuf's major version. If you were to continue building
+// this project and decided to break API compatibility, you would create a 'v2' directory
+// to package the new messages together and communicate to your users you've made
+// incompatible API changes.
+package log.v1;
+
+option go_package = "github.com/draklethedragon/api/log_v1";
+
+message Record {
+    // Each field has a type, name, and unique field number. These field numbers identify
+    // your fields in the marshaled binary format, and you shouldn't change them once your
+    // messages are in use in your projects. Consider fields immutable: you can stop using
+    // old fields and add new fields, but you can't modify existing fields. You want to
+    // change fields like this when you make small, iterative changes - like when you add
+    // or remove features or data from a message.
+    bytes value = 1;
+    uint64 offset = 2;
+}
